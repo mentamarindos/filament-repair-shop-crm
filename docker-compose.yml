@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+    filaplay81:
+        container_name: filaplay81
+        image: my-php81-fpm-grpc:1.5
+        working_dir: /var/www/html/fila-play
+        volumes:
+            - .:/var/www/html/fila-play
+        ports:
+            - "1511:1511"
+        restart: unless-stopped
+        networks:
+            - nginxnetwork
+        tty: true
+
+    mariadb-filaplay:
+        container_name: mariadb-filaplay
+        image: mariadb:10
+        ports:
+            - "3306:3307"
+        restart: unless-stopped
+        environment:
+            - MYSQL_ROOT_PASSWORD=
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+            - MYSQL_DATABASE=filaplaydb
+        volumes:
+            - mariadb10:/var/lib/mysql
+        networks:
+            - nginxnetwork
+        tty: true
+
+volumes:
+    mariadb10:
+        name: mariadb-filaplay-volume
+    nginxconfd:
+        external: true
+networks:
+  nginxnetwork:
+    driver: bridge
+    name: nginxnetwork
