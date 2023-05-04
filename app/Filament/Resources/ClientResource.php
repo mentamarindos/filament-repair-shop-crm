@@ -23,7 +23,23 @@ class ClientResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nombre')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('apellido')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('domicilio')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('telefono')
+                    ->tel()
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +47,15 @@ class ClientResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nombre'),
+                Tables\Columns\TextColumn::make('apellido'),
+                Tables\Columns\TextColumn::make('domicilio'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('telefono'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime(),
             ])
             ->filters([
                 //
