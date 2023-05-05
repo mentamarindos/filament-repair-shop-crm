@@ -2,23 +2,22 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CompanyResource\Pages;
+use App\Filament\Resources\CompanyResource\RelationManagers;
+use App\Models\Company;
 use Filament\Forms;
-use Filament\Tables;
-use App\Models\Client;
 use Filament\Resources\Form;
-use Filament\Resources\Table;
 use Filament\Resources\Resource;
-use Filament\Resources\Concerns\Translatable;
+use Filament\Resources\Table;
+use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\ClientResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ClientResource\RelationManagers;
 
-class ClientResource extends Resource
+class CompanyResource extends Resource
 {
-    // use Translatable;
-    protected static ?string $model = Client::class;
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $model = Company::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-office-building';
 
     public static function form(Form $form): Form
     {
@@ -27,17 +26,8 @@ class ClientResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('surname')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('address')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -50,16 +40,7 @@ class ClientResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                    Tables\Columns\TextColumn::make('surname')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('address')
-                    ->sortable()
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -83,24 +64,23 @@ class ClientResource extends Resource
         ];
     }
     
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListClients::route('/'),
-            'create' => Pages\CreateClient::route('/create'),
-            'edit' => Pages\EditClient::route('/{record}/edit'),
+            'index' => Pages\ListCompanies::route('/'),
+            'create' => Pages\CreateCompany::route('/create'),
+            'edit' => Pages\EditCompany::route('/{record}/edit'),
         ];
-    }    
-
+    }
+ 
     public static function getLabel(): ?string
     {
-        return trans('Client');
+        return trans('Company');
     }
 
     protected static function getNavigationLabel(): string
     {
-        return trans('Clients');
+        return trans('Companies');
     }
-
+    
 }

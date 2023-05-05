@@ -717,5 +717,12 @@
     "Saturday": "Sábado",
     "Sunday": "Domingo",
     "Client": "Cliente",
-    "Clients": "Clientes"
+    "Clients": "Clientes",
+    "Company": "Empresa",
+    "Companies": "Empresas",
+    "Contact": "Contacto",
+    "Contacts": "Contactos",
+    "Branch": "Sede",
+    "Branches": "Sedes",
+    "Branch Name": "Nombre de la sede"
 }
