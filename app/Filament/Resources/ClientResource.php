@@ -16,11 +16,9 @@ use App\Filament\Resources\ClientResource\RelationManagers;
 
 class ClientResource extends Resource
 {
-    use Translatable;
+    // use Translatable;
     protected static ?string $model = Client::class;
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $title = 'Custom Page Title';
-
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -40,7 +38,6 @@ class ClientResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
-                    ->tel()
                     ->required()
                     ->maxLength(255),
             ]);
@@ -78,6 +75,7 @@ class ClientResource extends Resource
         ];
     }
     
+
     public static function getPages(): array
     {
         return [
@@ -86,15 +84,15 @@ class ClientResource extends Resource
             'edit' => Pages\EditClient::route('/{record}/edit'),
         ];
     }    
- 
-    public static function getTranslatableLocales(): array
+
+    public static function getLabel(): ?string
     {
-        return ['en', 'es'];
+        return trans('Client');
     }
 
     protected static function getNavigationLabel(): string
     {
-        return __('Client');
+        return trans('Clients');
     }
 
 }
