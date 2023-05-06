@@ -71,10 +71,10 @@ return [
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
+            'charset' => null,
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
+            'search_path' => env('DB_PG_SEARCH_PATH', 'public'),
             'sslmode' => 'prefer',
         ],
 
