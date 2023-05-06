@@ -9,9 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Client extends Model
 {
     use HasFactory;
-    // use HasTranslations;
-
-    // public $translatable = ['name','surname','address','email','phone'];
 
     protected $fillable = [
         'name',

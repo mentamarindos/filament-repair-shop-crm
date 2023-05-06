@@ -16,9 +16,11 @@ use App\Filament\Resources\ClientResource\RelationManagers;
 
 class ClientResource extends Resource
 {
-    // use Translatable;
+
     protected static ?string $model = Client::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static bool $shouldRegisterNavigation = false;
+
 
     public static function form(Form $form): Form
     {
@@ -70,6 +72,7 @@ class ClientResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -90,6 +93,7 @@ class ClientResource extends Resource
             'index' => Pages\ListClients::route('/'),
             'create' => Pages\CreateClient::route('/create'),
             'edit' => Pages\EditClient::route('/{record}/edit'),
+            'view' => Pages\ViewClient::route('/{record}'),
         ];
     }    
 

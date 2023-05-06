@@ -9,4 +9,5 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewClient extends ViewRecord
 {
     protected static string $resource = ClientResource::class;
+        
 }
