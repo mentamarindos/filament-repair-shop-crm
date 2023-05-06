@@ -1,4 +1,4 @@
-# Phone store repair CRM
+# Repair shop - CRM
 
 ### Sistema de manejo de tickets para tienda de reparación de equipos electrónicos
 
