@@ -19,7 +19,7 @@ class ClientResource extends Resource
 
     protected static ?string $model = Client::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = true;
 
 
     public static function form(Form $form): Form

@@ -13,19 +13,14 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-        });
-
-
-        Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('client_id');
             $table->string('device');
             $table->text('description');
-            $table->enum('status', ['Pending', 'In repair', 'Waiting for parts', 'In diagnosis process', 'Finished', 'Cancelled'])->default('Pending');
+            $table->unsignedInteger('status_id')->default(1); // Asume que el estado 'Pending' tiene el ID 1
             $table->timestamps();
         
             $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('status_id')->references('id')->on('ticket_statuses');
         });
         
     }
