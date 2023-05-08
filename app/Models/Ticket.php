@@ -12,7 +12,8 @@ class Ticket extends Model
     protected $table = 'tickets';
     protected $fillable = [
         'client_id', 
-        'device', 
+        'device',
+        'device_model',
         'description', 
         'status_id'
     ];
