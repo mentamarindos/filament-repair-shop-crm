@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(CompaniesTableSeeder::class);
         // $this->call(BranchesTableSeeder::class);
         // $this->call(TicketStatusSeeder::class);
-        $this->call(DeviceSeeder::class);
+        // $this->call(DeviceSeeder::class);
+        $this->call(DeviceModelSeeder::class);
     }
 }
