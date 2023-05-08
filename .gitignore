@@ -18,5 +18,6 @@ yarn-error.log
 /.idea
 /.vscode
 *deprecatedfile*
+*ignoredByGit*
 .vercel
 *kanbn

@@ -24,3 +24,4 @@ Sistema para empresas y particulares vinculados a la reparación de artículos e
 - **Laravel (v10)** &mdash; Laravel es un framework de código abierto para el desarrollo rápido de aplicaciones web con PHP.
 - **Filament (v2)** &mdash; Filament es un panel de control de administración para aplicaciones web Laravel.
 - **PostgreSQL** &mdash; Un sistema de gestión de bases de datos relacionales.
+

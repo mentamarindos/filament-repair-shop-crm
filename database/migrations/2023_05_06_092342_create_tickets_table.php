@@ -16,7 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->string('device');
             $table->text('description');
-            $table->unsignedInteger('status_id')->default(1); // Asume que el estado 'Pending' tiene el ID 1
+            $table->unsignedBigInteger('status_id')->default(1); // Asume que el estado 'Pending' tiene el ID 1
+            $table->string('severity')->default('Low');
+            $table->mediumText('images')->nullable();
+            $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         
             $table->foreign('client_id')->references('id')->on('clients');

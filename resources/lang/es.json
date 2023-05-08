@@ -724,5 +724,7 @@
     "Contacts": "Contactos",
     "Branch": "Sede",
     "Branches": "Sedes",
-    "Branch Name": "Nombre de la sede"
+    "Branch Name": "Nombre de la sede",
+    "User": "Usuario",
+    "Users": "Usuarios"
 }
