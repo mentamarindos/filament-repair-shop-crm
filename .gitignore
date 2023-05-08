@@ -21,3 +21,4 @@ yarn-error.log
 *ignoredByGit*
 .vercel
 *kanbn
+storage/media-library/temp/*

@@ -4,10 +4,11 @@ namespace App\Filament\Resources\TicketResource\Pages;
 
 use Filament\Forms;
 use App\Models\Device;
-use App\Filament\Resources\TicketResource;
 use App\Models\DeviceModel;
 use Filament\Tables\Columns\ImageColumn;
+use App\Filament\Resources\TicketResource;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Resources\Pages\CreateRecord\Concerns\HasWizard;
 
 class CreateTicket extends CreateRecord
@@ -57,7 +58,13 @@ class CreateTicket extends CreateRecord
                     Forms\Components\TextInput::make('severity')
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\FileUpload::make('images')->image()->disk('local'),
+                    // Forms\Components\Hidden::make('images')->default(1111),
+                    SpatieMediaLibraryFileUpload::make('attachments')
+                        ->multiple()
+                        ->responsiveImages(),
+
+
+                    // Forms\Components\FileUpload::make('images')->image()->disk('local'),
                 ]),        
             ];
     }

@@ -6,12 +6,16 @@ use App\Models\Client;
 use App\Models\Device;
 use App\Models\DeviceModel;
 use App\Models\TicketStatus;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Ticket extends Model
+class Ticket extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
+    
     protected $table = 'tickets';
     protected $fillable = [
         'client_id', 

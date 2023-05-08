@@ -2,17 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TicketResource\Pages;
-use App\Filament\Resources\TicketResource\RelationManagers;
-use App\Models\Ticket;
 use Filament\Forms;
+use Filament\Tables;
+use App\Models\Ticket;
 use Filament\Resources\Form;
-use Filament\Resources\Resource;
 use Filament\Tables\Columns;
 use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Resources\Resource;
+use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\TicketResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use App\Filament\Resources\TicketResource\RelationManagers;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class TicketResource extends Resource
 {
@@ -43,11 +46,8 @@ class TicketResource extends Resource
                 Forms\Components\TextInput::make('severity')
                     ->required()
                     ->maxLength(255),
-                // Forms\Components\FileUpload::make('images')
-                //     ->image()
-                //     ->disk('local'),
-                Forms\Components\FileUpload::make('images'),
-
+                Forms\Components\SpatieMediaLibraryFileUpload::make('main')
+                    ->label('Image'),
                 Forms\Components\DateTimePicker::make('closed_at'),
             ]);
     }
@@ -62,9 +62,11 @@ class TicketResource extends Resource
                 Tables\Columns\TextColumn::make('deviceModel.model_name'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('severity'),
-                Tables\Columns\ImageColumn::make('images'),
-                Tables\Columns\TextColumn::make('closed_at')
-                    ->dateTime(),
+
+                SpatieMediaLibraryImageColumn::make('main')
+                    ->label('Image')
+                    ->rounded(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -74,8 +76,8 @@ class TicketResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
-                // Tables\Actions\ViewAction::make()->modalActions(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
