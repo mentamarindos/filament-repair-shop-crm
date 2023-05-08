@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Concerns\Translatable;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ClientResource\Pages;
+use App\Filament\Resources\ClientResource\Widgets\ClientOverview;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ClientResource\RelationManagers;
 
@@ -85,7 +86,13 @@ class ClientResource extends Resource
             //
         ];
     }
-    
+
+    public static function getWidgets(): array
+    {
+        return [
+            ClientOverview::class
+        ];
+    }
 
     public static function getPages(): array
     {

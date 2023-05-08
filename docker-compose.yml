@@ -12,13 +12,14 @@ services:
         restart: unless-stopped
         networks:
             - nginxnetwork
+            - filaplaynetwork
         tty: true
 
     mariadb-filaplay:
         container_name: mariadb-filaplay
         image: mariadb:10
         ports:
-            - "3306:3307"
+            - "3361:3306"
         restart: unless-stopped
         environment:
             - MYSQL_ROOT_PASSWORD=
@@ -27,7 +28,7 @@ services:
         volumes:
             - mariadb10:/var/lib/mysql
         networks:
-            - nginxnetwork
+            - filaplaynetwork
         tty: true
 
 volumes:
@@ -36,6 +37,9 @@ volumes:
     nginxconfd:
         external: true
 networks:
+  filaplaynetwork:
+    driver: bridge
+    name: filaplaynetwork
   nginxnetwork:
     driver: bridge
     name: nginxnetwork
