@@ -30,9 +30,9 @@ class TicketResource extends Resource
                 Forms\Components\Select::make('ticket_status_id')
                     ->required()
                     ->relationship('TicketStatus', 'name'),
-                Forms\Components\TextInput::make('device')
+                Forms\Components\Select::make('device_id')
                     ->required()
-                    ->maxLength(255),
+                    ->relationship('Device', 'brand'),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->maxLength(65535),

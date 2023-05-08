@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Device extends Model
 {
     use HasFactory;
-    protected $fillable = ['brand'];    
+    protected $fillable = ['brand']; 
+    
+    function deviceModel()
+    {
+        return $this->hasMany(DeviceModel::class);
+    }
 }

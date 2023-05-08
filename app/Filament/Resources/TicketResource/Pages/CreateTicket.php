@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\TicketResource\Pages;
 
+use Filament\Forms;
+use App\Models\Device;
 use App\Filament\Resources\TicketResource;
+use App\Models\DeviceModel;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\CreateRecord\Concerns\HasWizard;
-use Filament\Forms;
 
 class CreateTicket extends CreateRecord
 {
@@ -25,9 +27,23 @@ class CreateTicket extends CreateRecord
             Forms\Components\Wizard\Step::make('Dispositivo')
                 ->description('Datos del dispositivo')
                 ->schema([
-                    Forms\Components\TextInput::make('device')
+                    Forms\Components\Select::make('device_id')
                     ->required()
-                    ->maxLength(255),
+                    ->relationship('device', 'brand')
+                    ->reactive(),
+
+                    Forms\Components\Select::make('device_model_id')
+                    ->required()
+                    ->options(function (callable $get) {
+                        $models = DeviceModel::where('device_id',$get('device_id'));
+                        if(!$models)
+                        {
+                            return DeviceModel::all()->pluck('model_name', 'id')->toArray();
+                        } 
+                            
+                        return $models->pluck('model_name', 'id')->toArray();
+                    })
+                    ,
                 ]),
             Forms\Components\Wizard\Step::make('Datos del problema')
                 ->description('Información sobre la reparación')
@@ -43,5 +59,5 @@ class CreateTicket extends CreateRecord
                 ]),        
             ];
     }
-    
+
 }
