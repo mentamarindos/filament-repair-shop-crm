@@ -6,7 +6,7 @@ services:
             context: ./.docker
             dockerfile: php81.dockerfile
         container_name: filaplay81
-        image: php81withpostgres
+        # image: php81withpostgres
         working_dir: /var/www/html/fila-play
         volumes:
             - .:/var/www/html/fila-play
