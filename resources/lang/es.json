@@ -22,7 +22,7 @@
     "Add Team Member": "Añadir un nuevo miembro al equipo",
     "Add VAT Number": "Agregar número VAT",
     "Added.": "Añadido.",
-    "Address": "Dirección",
+    "Address": "Domicilio",
     "Address Line 2": "Dirección de la línea 2",
     "Afghanistan": "Afganistán",
     "Aland Islands": "Islas Aland",
@@ -726,5 +726,11 @@
     "Branches": "Sedes",
     "Branch Name": "Nombre de la sede",
     "User": "Usuario",
-    "Users": "Usuarios"
+    "Users": "Usuarios",
+    "List of tickets": "Lista de partes",
+    "Severity": "Prioridad",
+    "Device model": "Modelo de dispositivo",
+    "Device type": "Tipo de dispositivo",
+    "Device": "Marca del dispositivo",
+    "Phone": "Teléfono"
 }

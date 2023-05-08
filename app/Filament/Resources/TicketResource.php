@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,14 +34,21 @@ class TicketResource extends Resource
                 Forms\Components\Select::make('device_id')
                     ->required()
                     ->relationship('Device', 'brand'),
+                Forms\Components\Select::make('device_model_id')
+                    ->required()
+                    ->relationship('DeviceModel', 'model_name'),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->maxLength(65535),
                 Forms\Components\TextInput::make('severity')
                     ->required()
                     ->maxLength(255),
-                // Forms\Components\Textarea::make('images')->maxLength(16777215),
-                // Forms\Components\DateTimePicker::make('closed_at'),
+                // Forms\Components\FileUpload::make('images')
+                //     ->image()
+                //     ->disk('local'),
+                Forms\Components\FileUpload::make('images'),
+
+                Forms\Components\DateTimePicker::make('closed_at'),
             ]);
     }
 
@@ -48,12 +56,13 @@ class TicketResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('client_id'),
-                Tables\Columns\TextColumn::make('status_id'),
-                Tables\Columns\TextColumn::make('device'),
+                Tables\Columns\TextColumn::make('client.name'),
+                Tables\Columns\TextColumn::make('ticketStatus.name'),
+                Tables\Columns\TextColumn::make('device.brand'),
+                Tables\Columns\TextColumn::make('deviceModel.model_name'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('severity'),
-                Tables\Columns\TextColumn::make('images'),
+                Tables\Columns\ImageColumn::make('images'),
                 Tables\Columns\TextColumn::make('closed_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -65,8 +74,8 @@ class TicketResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->slideOver(),
+                // Tables\Actions\ViewAction::make()->modalActions(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -85,8 +94,19 @@ class TicketResource extends Resource
         return [
             'index' => Pages\ListTickets::route('/'),
             'create' => Pages\CreateTicket::route('/create'),
-            'view' => Pages\ViewTicket::route('/{record}'),
             'edit' => Pages\EditTicket::route('/{record}/edit'),
+            'view' => Pages\ViewTicket::route('/{record}'),
         ];
     }    
+
+    public static function getLabel(): ?string
+    {
+        return trans('Parte');
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return trans('List of tickets');
+    }
+
 }

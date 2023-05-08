@@ -14,4 +14,5 @@ class Device extends Model
     {
         return $this->hasMany(DeviceModel::class);
     }
+    
 }

@@ -4,14 +4,17 @@ namespace App\Filament\Resources\ClientResource\Pages;
 
 use App\Filament\Resources\ClientResource;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\ManageRecords;
 
-class CreateClient extends CreateRecord
+class ManageClients extends ManageRecords
 {
     protected static string $resource = ClientResource::class;
 
-    protected function getRedirectUrl(): string
+    protected function getActions(): array
     {
-        return $this->getResource()::getUrl('index');
+        return [
+            Actions\CreateAction::make(),
+        ];
     }
+    
 }

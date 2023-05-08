@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Client;
 use App\Models\Device;
 use App\Models\DeviceModel;
+use App\Models\TicketStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -14,10 +15,12 @@ class Ticket extends Model
     protected $table = 'tickets';
     protected $fillable = [
         'client_id', 
-        'device',
-        'device_model',
-        'description', 
-        'status_id'
+        'device_id',
+        'device_model_id',
+        'description',
+        'images',
+        'status_id',
+        'severity'
     ];
 
     public function client()
@@ -27,8 +30,13 @@ class Ticket extends Model
 
     public function TicketStatus()
     {
-        return $this->belongsTo(TicketStatus::class);
+        return $this->belongsTo(TicketStatus::class, 'ticket_status_id', 'id');
     }
+
+    // public function TicketStatus()
+    // {
+    //     return $this->belongsTo(TicketStatus::class);
+    // }
 
     public function device()
     {

@@ -6,6 +6,7 @@ use Filament\Forms;
 use App\Models\Device;
 use App\Filament\Resources\TicketResource;
 use App\Models\DeviceModel;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\CreateRecord\Concerns\HasWizard;
 
@@ -22,7 +23,8 @@ class CreateTicket extends CreateRecord
                 ->schema([
                     Forms\Components\Select::make('client_id')
                     ->required()
-                    ->relationship('client', 'name'),
+                    ->relationship('client', 'name')
+                    ->searchable(),
                 ]),
             Forms\Components\Wizard\Step::make('Dispositivo')
                 ->description('Datos del dispositivo')
@@ -30,7 +32,8 @@ class CreateTicket extends CreateRecord
                     Forms\Components\Select::make('device_id')
                     ->required()
                     ->relationship('device', 'brand')
-                    ->reactive(),
+                    ->reactive()
+                    ->afterStateUpdated(fn (callable $set) => $set('device_model_id', null)),
 
                     Forms\Components\Select::make('device_model_id')
                     ->required()
@@ -49,13 +52,12 @@ class CreateTicket extends CreateRecord
                 ->description('Información sobre la reparación')
                 ->schema([
                     Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->maxLength(65535),
-                Forms\Components\TextInput::make('severity')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\FileUpload::make('images')
-                    ->required()
+                        ->required()
+                        ->maxLength(65535),
+                    Forms\Components\TextInput::make('severity')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\FileUpload::make('images')->image()->disk('local'),
                 ]),        
             ];
     }
