@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ticket extends Model
 {
@@ -15,5 +16,15 @@ class Ticket extends Model
         'description', 
         'status_id'
     ];
-    
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function TicketStatus()
+    {
+        return $this->belongsTo(TicketStatus::class);
+    }
+
 }

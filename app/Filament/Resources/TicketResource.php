@@ -24,10 +24,12 @@ class TicketResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('client_id')
-                    ->required(),
-                Forms\Components\TextInput::make('status_id')
-                    ->required(),
+                Forms\Components\Select::make('client_id')
+                    ->required()
+                    ->relationship('client', 'name'),
+                Forms\Components\Select::make('ticket_status_id')
+                    ->required()
+                    ->relationship('TicketStatus', 'name'),
                 Forms\Components\TextInput::make('device')
                     ->required()
                     ->maxLength(255),
@@ -37,9 +39,8 @@ class TicketResource extends Resource
                 Forms\Components\TextInput::make('severity')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('images')
-                    ->maxLength(16777215),
-                Forms\Components\DateTimePicker::make('closed_at'),
+                // Forms\Components\Textarea::make('images')->maxLength(16777215),
+                // Forms\Components\DateTimePicker::make('closed_at'),
             ]);
     }
 
