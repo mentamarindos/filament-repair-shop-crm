@@ -11,7 +11,7 @@ services:
         working_dir: /etc/nginx/conf.d
         volumes:
             - nginxconfd:/etc/nginx/conf.d
-            - /home/artisan/projects/laravel/:/var/www/html/
+            - ./..:/var/www/html/
             # - /home/artisan/projects/laravel/mov-desktop/.docker/nginx/auto.laramov.test.conf:/etc/nginx/conf.d/auto.laramov.test.conf:rw
             # - /srv/fotooveja:/var/www/html/mov-desktop/public/fotooveja # temporal solution for this mounted dir 
             - ./conf.d:/etc/nginx/conf.d
@@ -37,6 +37,8 @@ services:
             - nginxnetwork
             - filaplaynetwork
         tty: true
+        depends_on:
+            - sharednginx
 
     mariadb-filaplay:
         container_name: mariadb-filaplay
@@ -53,7 +55,6 @@ services:
         networks:
             - filaplaynetwork
         tty: true
-
 volumes:
     mariadb10:
         name: mariadb-filaplay-volume
