@@ -14,7 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('users')->delete();
         
@@ -25,7 +24,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@admin.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$10$jAaxCSyNPY9ZGdP4ubmmFOOqKwDNB/HLaUQgZzjhROIv.ybppsuG2',
+                'password' => '$2y$10$pQNyVzv75YezxAZ58duYwe9Y8tAI45G3.pCBbEHTRKAClAseNEDoG', // 123456789
                 'remember_token' => 't7XwAiEIQ0Cc5izTi8Ur9NIScwUjiVfQWrJbx6FT3Y3uccT3UwEyvywF0qAs',
                 'created_at' => '2023-05-03 13:13:47',
                 'updated_at' => '2023-05-08 07:12:05',
