@@ -1,12 +1,32 @@
 version: '3.7'
 
 services:
-    filaplay81:
+    sharednginx:
+        container_name: shared-nginx-container 
+        image: mynginx/compartido
         build:
             context: ./.docker
-            dockerfile: php81.dockerfile
-        container_name: filaplay81
-        # image: php81withpostgres
+            dockerfile: nginx.dockerfile
+        tty: true
+        working_dir: /etc/nginx/conf.d
+        volumes:
+            - nginxconfd:/etc/nginx/conf.d
+            - /home/artisan/projects/laravel/:/var/www/html/
+            # - /home/artisan/projects/laravel/mov-desktop/.docker/nginx/auto.laramov.test.conf:/etc/nginx/conf.d/auto.laramov.test.conf:rw
+            # - /srv/fotooveja:/var/www/html/mov-desktop/public/fotooveja # temporal solution for this mounted dir 
+            - ./conf.d:/etc/nginx/conf.d
+        ports:
+            - "80:8080"
+            - "443:443"
+        restart: unless-stopped
+        networks:
+            - nginxnetwork
+    filaplay81:
+        # build:
+        #     context: ./.docker
+        #     dockerfile: php81.dockerfile
+        # container_name: filaplay81
+        image: php81withpostgres
         working_dir: /var/www/html/fila-play
         volumes:
             - .:/var/www/html/fila-play
